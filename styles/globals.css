@@ -14,3 +14,36 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.movie {
+  width: 200px;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.movie-search-results-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movie-overview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  transition: transform 0.2s ease-in-out;
+  max-width: 100%;
+  background-color: black;
+  color: white;
+}
+
+.movie:hover .movie-overview {
+  transform: translateY(0%);
+}
