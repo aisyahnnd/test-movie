@@ -21,7 +21,6 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
       style={{
         width: "100%",
         display: "flex",
-        backgroundColor: "white",
         justifyContent: "center",
         marginTop: 10,
       }}
@@ -33,6 +32,7 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
           color="primary"
           hideNextButton
           hidePrevButton
+          sx={{ backgroundColor: "white", borderRadius: 5 }}
         />
       </ThemeProvider>
     </div>

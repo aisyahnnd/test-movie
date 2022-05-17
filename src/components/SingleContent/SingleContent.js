@@ -23,14 +23,14 @@ return (
             height: 550,
             paddingTop: 3,
         }}>
-            <Badge
-                badgeContent={vote_average}
-                color={vote_average > 6 ? "primary" : "secondary"}
-            />
             <img
                 className={styles.poster}
                 src={poster ? `${img_300}${poster}` : unavailable}
                 alt={title}
+            />
+            <Badge
+                badgeContent={vote_average}
+                color={vote_average > 6 ? "primary" : "secondary"}
             />
             <b className={styles.title}>{title}</b>
             <span className={styles.subTitle}>

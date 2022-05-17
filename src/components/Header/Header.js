@@ -1,14 +1,37 @@
 import styles from './Header.module.css';
 import Link from 'next/link';
+import React, { useEffect, useState } from "react";
 
 export default function Header() {
+    const [navbar, setNavbar] = useState(false);
+
+    const changeBackground = () => {
+        if (window.scrollY >= 3000) {
+            setNavbar(true);
+        } else {
+            setNavbar(false);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', changeBackground);
+    },[]);
+    
     return (
-        <header className={styles.container}>
+        <>
+        <nav className={navbar ? styles.navbar.active : styles.navbar}>
+            <header className={styles.container}>
+                
             <ul className={styles.list}>
                 <li className={styles.item}><Link href="/">Home</Link></li>
-                <li className={styles.item}><Link href="/">Search</Link></li>
+                <li className={styles.item}><Link href="/Movies/Movies">Search</Link></li>
                 <li className={styles.item}><Link href="/">Login</Link></li>
             </ul>
-        </header>
+
+            </header>
+        
+        </nav>
+        </>
+        
     );
 }
