@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
@@ -13,7 +13,24 @@ import {
 import styles from './ContentModal.module.css';
 import Box from '@mui/material/Box';
 
-export default function TransitionsModal({ children, media_type, id }) {
+import { GlobalContext } from "../../context/GlobalState";
+
+export default function TransitionsModal({ children, media_type, id, movie }) {
+
+const {
+    addMovieToWatchlist,
+    watchlist,
+} = useContext(GlobalContext);
+
+let storedMovie = watchlist.find((o) => o.id === movie.id);
+console.log('halo:',storedMovie);
+console.log('movie',movie)
+
+const watchlistDisabled = storedMovie
+? true
+: false;
+
+
 const [open, setOpen] = useState(false);
 const [content, setContent] = useState();
 
@@ -28,6 +45,8 @@ const fetchData = async () => {
     setContent(data);
     // console.log(data);
 };
+
+console.log(addMovieToWatchlist);
 
 useEffect(() => {
     fetchData();
@@ -111,9 +130,10 @@ return (
                         variant="contained"
                         color="primary"
                         target="__blank"
-                        href="#"
+                        disabled={watchlistDisabled}
+                        onClick={() => addMovieToWatchlist(movie)}
                         >
-                        ADD TO FAVOURITE
+                        ADD TO FAVORITE
                     </Button>
                 </div>
             </div>

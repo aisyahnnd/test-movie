@@ -12,13 +12,14 @@ import Trending from "./Trending/Trending";
 import Movies from "./Movies/Movies";
 import Link from 'next/link';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { GlobalProvider } from "../src/context/GlobalState";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
 export default function Home() {
   return (
-    <>
+    <GlobalProvider>
       <Trending />  
-    </>   
+    </GlobalProvider>   
   );
 }

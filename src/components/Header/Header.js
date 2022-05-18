@@ -23,8 +23,9 @@ export default function Header() {
             <header className={styles.container}>
                 
             <ul className={styles.list}>
-                <li className={styles.item}><Link href="/">Home</Link></li>
-                <li className={styles.item}><Link href="/Movies/Movies">Search</Link></li>
+                <li className={styles.item}><Link href="/">Movies</Link></li>
+                <li className={styles.item}><Link href="/Favorite/Watchlist">Favorite</Link></li>
+                <li className={styles.item}><Link href="/Search/Search">Search</Link></li>
                 <li className={styles.item}><Link href="/">Login</Link></li>
             </ul>
 
