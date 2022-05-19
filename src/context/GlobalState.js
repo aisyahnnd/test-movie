@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
     };
   
 }
-
+console.log('init:', initialState)
 
 // create context
 export const GlobalContext = createContext(initialState);
@@ -30,6 +30,8 @@ export const GlobalProvider = (props) => {
   const addMovieToWatchlist = (movie) => {
     dispatch({ type: "ADD_MOVIE_TO_WATCHLIST", payload: movie });
   };
+
+  
 
   const removeMovieFromWatchlist = (id) => {
     dispatch({ type: "REMOVE_MOVIE_FROM_WATCHLIST", payload: id });

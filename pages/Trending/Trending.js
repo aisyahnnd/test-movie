@@ -37,6 +37,7 @@ const Trending = () => {
                     date={each.first_air_date || each.release_date}
                     media_type={each.media_type}
                     vote_average={each.vote_average}
+                    movie={each}
                     />
                 ))}
             </div>

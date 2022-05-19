@@ -6,7 +6,7 @@ import styles from './SingleContent.module.css';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Image from 'next/image'
-import { MovieControls } from "../Favorite/MovieControls";
+import { MovieControls } from "../MovieControls";
 
 const SingleContent = ({
     id,
@@ -15,11 +15,12 @@ const SingleContent = ({
     date,
     media_type,
     vote_average,
-    type,movie,
+    type,
+    movie,
 }) => {
 
 return (
-    <ContentModal media_type={media_type} id={id}>
+    <ContentModal media_type={media_type} id={id} movie={movie} >
         <Box sx={{
             width: 300,
             height: 550,
@@ -40,7 +41,7 @@ return (
                 <span className={styles.subTitle}>{date}</span>
             </span>
         </Box>
-        <MovieControls type={type} movie={movie} />
+        {/* <MovieControls type={type} movie={movie} /> */}
     </ContentModal>
   );
 };

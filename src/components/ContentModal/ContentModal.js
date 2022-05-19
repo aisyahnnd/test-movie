@@ -17,13 +17,12 @@ import { GlobalContext } from "../../context/GlobalState";
 
 export default function TransitionsModal({ children, media_type, id, movie }) {
 
-const {
-    addMovieToWatchlist,
-    watchlist,
-} = useContext(GlobalContext);
+    
+const { addMovieToWatchlist, watchlist } = useContext(GlobalContext);
+console.log('wl', watchlist)
 
-let storedMovie = watchlist.find((o) => o.id === movie.id);
-console.log('halo:',storedMovie);
+let storedMovie = watchlist.find((fal) => fal.id === movie.id);
+// console.log('halo:',storedMovie);
 console.log('movie',movie)
 
 const watchlistDisabled = storedMovie
