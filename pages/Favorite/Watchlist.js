@@ -4,10 +4,11 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import SingleContent from "../../src/components/SingleContent/SingleContent";
 import { MovieCard } from '../../src/components/MovieCard';
+import styles from './Watchlist.module.css';
 
 
 
-const Watchlist = ({ watchlist }) => {
+const Watchlist = () => {
 
   // let res = [];
 
@@ -16,14 +17,18 @@ const Watchlist = ({ watchlist }) => {
   // }
 //  const [res, setRes] = useState(typeof window !== 'undefined' && useContext(GlobalContext).watchlist);
 
+const res = JSON.parse(
+  typeof window !== "undefined" && localStorage.getItem("watchlist")
+);
   // const res = useContext(GlobalContext).watchlist;
-    console.log(777,'haloo :',watchlist);
+    // console.log(777,'haloo :',id);
     // console.log(777,'haloo :',useContext(GlobalContext).watchlist);
 
 
 
   return (
-    <div className="movie-page">
+
+    <div className={styles.movieCard}>
       <div className="container">
         <div className="header">
           <h1 className="heading">My Watchlist</h1>
@@ -35,9 +40,11 @@ const Watchlist = ({ watchlist }) => {
 
         <div>
 
-            {/* {res && res.length > 0 ? res.map((movie) => {
+            {res && res.length > 0 ? res.map((movie) => {
               return (<MovieCard movie={movie} key={movie.id} type="watchlist" />)
-            }) : null} */}
+            }) : 
+              <h2 className="no-movies">No movies in your list! Add some!</h2>
+            }
             
           </div>
 
@@ -56,14 +63,14 @@ const Watchlist = ({ watchlist }) => {
   );
 };
 
-export async function getServerSideProps() {
-  const res = useContext(GlobalContext);
- console.log('res',res);
-  return {
-    props: {
-      watchlist: res,
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const res = useContext(GlobalContext);
+//  console.log('res',res);
+//   return {
+//     props: {
+//       watchlist: res,
+//     },
+//   };
+// }
 
 export default Watchlist;

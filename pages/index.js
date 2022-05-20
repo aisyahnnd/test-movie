@@ -9,9 +9,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import SimpleBottomNavigation from '../src/components/MainNav';
 import Trending from "./Trending/Trending";
+import Search from "./Search/Search";
 import Movies from "./Movies/Movies";
 import Link from 'next/link';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalProvider } from "../src/context/GlobalState";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
@@ -19,7 +20,7 @@ const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 export default function Home() {
   return (
     <GlobalProvider>
-      <Trending />  
+        <Trending />
     </GlobalProvider>   
   );
 }

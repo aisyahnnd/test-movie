@@ -19,7 +19,7 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
 
     
 const { addMovieToWatchlist, watchlist } = useContext(GlobalContext);
-console.log('wl', watchlist)
+console.log('wl', addMovieToWatchlist)
 
 let storedMovie = watchlist.find((fal) => fal.id === movie.id);
 // console.log('halo:',storedMovie);

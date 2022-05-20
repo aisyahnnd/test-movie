@@ -97,6 +97,7 @@ const Search = () => {
                 date={each.first_air_date || each.release_date}
                 media_type={type ? "tv" : "movie"}
                 vote_average={each.vote_average}
+                movie={each}
               />
             ))}
           {searchText &&
