@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-import FormError from '../Forms/Error'
+import FormError from './formError'
 import Link from 'next/link'
 
 import { SignUp, database } from '../../firebaseConfig';

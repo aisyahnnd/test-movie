@@ -4,7 +4,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import SingleContent from "../../src/components/SingleContent/SingleContent";
 import { MovieCard } from '../../src/components/MovieCard';
-import styles from './Watchlist.module.css';
+import styles from './watchlist.module.css';
 
 
 

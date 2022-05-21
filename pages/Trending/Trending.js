@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 import SingleContent from "../../src/components/SingleContent/SingleContent";
 import CustomPagination from "../../src/components/Pagination/CustomPagination";
-import styles from './Trending.module.css';
+import styles from './trending.module.css';
 
 const Trending = () => {
     const [page, setPage] = useState(1);

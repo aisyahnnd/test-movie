@@ -9,9 +9,8 @@ import Typography from '@mui/material/Typography'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-import FormError from '../Forms/Error'
+import FormError from './formError'
 import Link from 'next/link'
-import { SignIn, GetSignInErrorMessage } from '../services/firebase'
 
 import { app } from '../../firebaseConfig';
 import {
@@ -50,7 +49,7 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      .then((response) => {
+      .then((response, authUser) => {
           alert('Successful Login!');
           resetField("email");
           resetField("password");
@@ -58,7 +57,7 @@ const Login = () => {
           console.log(response.user)
           sessionStorage.setItem('Token', response.user.accessToken);
           console.log('Login Sukses');
-          router.push('/')
+          router.push('/about')
       })
     } catch (error) {
       alert('Wrong email or password!');

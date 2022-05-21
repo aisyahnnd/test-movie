@@ -1,14 +1,44 @@
-import Head from 'next/head';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from '../context/AuthUserContext';
 
-export default function About() {
-    return(
-        <div className='container'>
-            <Head>
-                <title>About Us</title>
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="stylesheet" href="/styles.css" /> 
-            </Head>
-            <h1>About Us</h1>
-        </div>
-    )
+import {Container, Row, Col, Button} from 'reactstrap';
+
+
+const About = () => {
+  const { authUser, loading, signOut } = useAuth();
+  const router = useRouter();
+
+  // Listen for changes on loading and authUser, redirect if needed
+  useEffect(() => {
+    if (!loading && !authUser)
+      router.push('/auth/home')
+  }, [authUser, loading])
+  console.log(777, authUser)
+
+  return (
+    <Container>
+
+        {
+          loading ?
+            <Row>
+              <Col>Loading....</Col>
+            </Row> :
+            <>
+              <Row>
+                <Col>
+                  { authUser && <div>Congratulations {authUser?.email}! You are logged in.</div> }
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button onClick={signOut}>Sign out</Button>
+                </Col>
+              </Row>
+            </>
+        }
+    </Container>
+  )
 }
+
+export default About;
