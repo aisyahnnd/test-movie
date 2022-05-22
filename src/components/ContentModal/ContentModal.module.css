@@ -43,7 +43,7 @@
 
 .ContentModal__title {
   height: 12%;
-  font-size: 5vw;
+  font-size: 3vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,10 +67,12 @@
 @media (min-width: 835px) {
   .ContentModal__landscape {
     display: none;
+    border-radius: 5px;
   }
   .ContentModal__portrait {
     display: flex;
     width: 38%;
+    border-radius: 5px;
   }
   .ContentModal {
     flex-direction: row;

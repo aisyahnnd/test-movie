@@ -2,11 +2,8 @@ import Badge from '@mui/material/Badge';
 import { img_300, unavailable } from "../../config/config";
 import ContentModal from "../ContentModal/ContentModal";
 import styles from './SingleContent.module.css';
-
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Image from 'next/image'
-import { MovieControls } from "../MovieControls";
+
 
 const SingleContent = ({
     id,
@@ -41,7 +38,6 @@ return (
                 <span className={styles.subTitle}>{date}</span>
             </span>
         </Box>
-        {/* <MovieControls type={type} movie={movie} /> */}
     </ContentModal>
   );
 };

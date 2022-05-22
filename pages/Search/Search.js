@@ -1,18 +1,18 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Button from '@mui/material/Button';
-import styles from './search.module.css';
-import SearchIcon from '@mui/icons-material/Search';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomPagination from "../../src/components/Pagination/CustomPagination";
 import SingleContent from "../../src/components/SingleContent/SingleContent";
+import styles from './search.module.css';
+import TextField from '@mui/material/TextField';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
 import MovieIcon from '@mui/icons-material/Movie';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
+import Head from 'next/head';
   
 const Search = () => {
     const [type, setType] = useState(0);
@@ -39,7 +39,7 @@ const Search = () => {
         );
         setContent(data.results);
         setNumOfPages(data.total_pages);
-        // console.log(data);
+        // console.log(777,data);
       } catch (error) {
         console.error(error);
       }
@@ -48,15 +48,17 @@ const Search = () => {
     useEffect(() => {
       window.scroll(0, 0);
       fetchSearch();
-      // eslint-disable-next-line
     }, [type, page]);
   
     return (
       <div>
+        <Head>
+          <title>Search Movie</title>
+        </Head>
         <ThemeProvider theme={darkTheme}>
           <div className={styles.search}>
-                  <TextField
-              style={{ flex: 1, backgroundColor: "White"}}
+            <TextField
+              style={{ flex: 1, backgroundColor: "white" }}
               label="Search"
               variant="filled"
               onChange={(e) => setSearchText(e.target.value)}
@@ -68,7 +70,6 @@ const Search = () => {
             >
               <SearchIcon fontSize="large" />
             </Button>
-            
           </div>
           <Tabs
             value={type}
@@ -99,10 +100,12 @@ const Search = () => {
                 vote_average={each.vote_average}
                 movie={each}
               />
-            ))}
+            ))
+          }
           {searchText &&
             !content &&
-            (type ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)}
+            (type ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)
+          }
         </div>
         {numOfPages > 1 && (
           <CustomPagination setPage={setPage} numOfPages={numOfPages} />

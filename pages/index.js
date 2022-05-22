@@ -1,25 +1,40 @@
-import Head from 'next/head';
-import getConfig from 'next/config';
-import Movie from '../src/components/Movie';
+import * as React from 'react';
 import { useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import SimpleBottomNavigation from '../src/components/MainNav';
-import Trending from "./trending/trending";
-import Search from "./search/search";
-import Link from 'next/link';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalProvider } from "../src/context/GlobalState";
+import { useRouter } from 'next/router';
+import { useAuth } from '../context/AuthUserContext';
+import Head from 'next/head';
+import Trending from "./trending/trending";
+import Typography from '@mui/material/Typography';
 
-const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
 export default function Home() {
+  const { authUser, loading, signOut } = useAuth();
+  const router = useRouter();
+
+  // Listen for changes on loading and authUser, redirect if needed
+  useEffect(() => {
+    if (!loading && !authUser)
+      router.push('/')
+  }, [authUser, loading])
+  console.log(777, authUser)
+
   return (
+    <React.Fragment>
     <GlobalProvider>
-        <Trending />
-    </GlobalProvider>   
+      <Head>
+        <title>Movie App</title>
+      </Head>
+        { loading ? 
+            <Typography> </Typography> :
+        <>
+            <Typography align="left" style={{ paddingLeft: 20, paddingTop: 20, }}>
+              { authUser && <div>Congratulations {authUser?.email}! You are logged in.</div> }
+            </Typography>
+        </>
+        }
+      <Trending />
+    </GlobalProvider>  
+    </React.Fragment>
   );
 }

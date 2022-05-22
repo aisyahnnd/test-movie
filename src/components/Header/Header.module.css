@@ -4,7 +4,8 @@
     background-color: #131a28;
 
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    padding-right: 20px;
     align-items: center;
     height: 80px;
     width: 100%;
@@ -37,4 +38,18 @@
 
 .navbar.active {
     background: linear-gradient(90deg, rgb(50, 146, 255) 0%, rgb(14, 156, 250) 100%)
+}
+
+.leftItem {
+    padding: 0;
+    box-shadow: 3px 3px 11px 3px rgb(0 0 0 / 32%);
+    background-color: #131a28;
+
+    display: flex;
+    justify-content: left;
+    padding-left: 20px;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    max-width: 1500px;
 }

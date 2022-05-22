@@ -23,6 +23,7 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
         display: "flex",
         justifyContent: "center",
         marginTop: 10,
+        padding: 20
       }}
     >
       <ThemeProvider theme={darkTheme}>

@@ -1,9 +1,4 @@
-import Head from 'next/head';
 import { useState, useEffect } from 'react';
-import Movie from '../../src/components/Movie';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import axios from 'axios';
 import SingleContent from "../../src/components/SingleContent/SingleContent";
 import CustomPagination from "../../src/components/Pagination/CustomPagination";
@@ -42,8 +37,8 @@ const Trending = () => {
                 ))}
             </div>
             <CustomPagination setPage={setPage} />
-    </>
-  )
+        </>
+    )
 }
 
 export default Trending;

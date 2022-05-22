@@ -1,19 +1,18 @@
 import '../styles/globals.css';
-import Layout from '../src/components/Layout/Layout';
 import { GlobalProvider } from "../src/context/GlobalState";
 import { AuthUserProvider } from '../context/AuthUserContext';
+import Header from '../src/components/Header/Header';
 
 function MyApp({ Component, pageProps }) {
-  return (
+
+  return (        
     <GlobalProvider>
-      <Layout>
         <AuthUserProvider>
+          <Header/>
           <Component {...pageProps} />
         </AuthUserProvider>
-        
-      </Layout>
     </GlobalProvider>
   );
 }
 
-export default MyApp
+export default MyApp;
