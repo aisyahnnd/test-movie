@@ -14,9 +14,10 @@ import {
 } from "../../config/config";
 import styles from './ContentModal.module.css';
 
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { database } from '../../../lib/firebase';
 import { useAuth } from '../../../context/AuthUserContext';
+import { KeyboardReturnOutlined } from '@mui/icons-material';
 
 
 export default function TransitionsModal({ children, media_type, id, movie }) {
@@ -34,6 +35,7 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
     const handleClose = () => setOpen(false);
 
     const { authUser, loading, signOut } = useAuth();
+    const [movies, setMovies] = useState([]);
 
     const fetchData = async () => {
         const { data } = await axios.get(
@@ -69,6 +71,8 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
             console.log(error.message)
         })
 
+        
+
         //console.log("Document written with ID: ", docRef.id);
         // const moviesCollRef = collection(database, 'movies')
         // addDoc(moviesCollRef, {title})
@@ -79,6 +83,80 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
         //     console.log(error.message)
         // })
     }
+
+    // function getMovies(database) {
+    //     const moviesCol = collection(database, 'movies');
+    //     const movieSnapshot = getDocs(moviesCol);
+    //     const movieList = movieSnapshot.docs.map(doc => doc.data());
+    //     console.log(888,'xixi',movieList)
+    //     return movieList;
+    // }
+
+    // function getMovies() {
+    //     const movieCollectionRef = collection(database, 'movies')
+    //     getDocs(movieCollectionRef)
+    //     .then(response => {
+    //         const movs = response.docs.map(doc => ({
+    //             data: doc.data(),
+    //             id: doc.id,
+    //         }))
+    //         setMovies(movs)
+    //     })
+    //     .catch(error => console.log(error.message))
+    // }
+
+    function getData() {
+        // const querySnapshot = await getDocs(collection(database, "movies"));
+        // const movs = querySnapshot.map((doc) => {
+        // // doc.data() is never undefined for query doc snapshots
+        //     console.log(doc.id, " => ", doc.data());
+        // });
+        // setMovies(movs);
+        // if (querySnapshot.exists()) {
+        // console.log("Document data:", querySnapshot.data());
+        // } else {
+        // // doc.data() will be undefined in this case
+        // console.log("No such document!");
+        // }
+
+        const movieCollectionRef = collection(database, 'movies')
+        getDocs(movieCollectionRef)
+        .then(response => {
+            const movs = response.docs.map(doc => ({
+                data: doc.data(),
+                id: doc.id,
+            }))
+            setMovies(movs)
+        })
+        .catch(error => console.log(error.message))
+    }
+
+    useEffect(() => {
+        getData();
+    },[])
+
+    useEffect(() => {
+        console.log(movies);
+    },[movies])
+    
+//fal.data.user === authUser.uid
+    
+    let storedMovieFavorite = movies.find(fal => {
+        return (
+            authUser ? fal.data.user === authUser.uid && fal.data.movie.id === movie.id : null
+        );  
+    })
+   
+    // console.log(444,'moviemov', movies);
+    // console.log(555,'moviemov', movie);
+    // console.log(666,'stored',storedMovieFavorite)
+    const favoriteDisabled = storedMovieFavorite ? true : false;
+
+    // function disableButton() {
+    //     var btn = document.getElementById('btn');
+    //     btn.disabled = true;
+    //     btn.innerText = 'Posting...'
+    // }
 
     return (
         <>
@@ -154,7 +232,7 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
                                 variant="contained"
                                 color="primary"
                                 target="__blank"
-                                disabled={watchlistDisabled}
+                                disabled={favoriteDisabled}
                                 onClick={() => handleSubmit()}
                                 >
                                 ADD TO FAVORITE

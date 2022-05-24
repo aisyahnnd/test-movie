@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { database } from '../lib/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { MovieCard } from '../src/components/Movie/MovieCard';
 import { useAuth } from '../context/AuthUserContext';
+import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Favorite() {
     const [movies, setMovies] = useState([]);
@@ -36,16 +38,27 @@ export default function Favorite() {
         console.log('Please login first');
     }, [authUser, loading])
 
+    const handleDelete = (id) => {
+        const docRef = doc(database, 'movies', id);
+        deleteDoc(docRef)
+        .then(() => {
+            console.log('Document deleted');
+            window.location.reload(true);
+        })
+        .catch(error => console.log(error.message)) 
+    }
     // console.log(777,'auth',authUser)
     // const mov = movies.filter((v) => {
     //     return v.data.user === authUser.uid
     // })
-    // console.log(777,'auth',mov)
+    // console.log(777,'movmov',getMovies)
 
     return (
         <>
             <div>
-                <h4>List Movies</h4>
+                <div className="heading">
+                    <h2>List Favorite Movies</h2>
+                </div>
                 {/* <ul style={{ color: "white" }}>
                     {movies.map(movie => (
                         <li key={movie.id}>{ movie.data.movie.title }</li>
@@ -54,13 +67,28 @@ export default function Favorite() {
                 </ul> */}
                 { authUser ? 
                 <div>
-                    {movies.filter((mov) => {
+                    {movies && movies.length > 0 ? movies.filter((mov) => {
                         return mov.data.user === authUser.uid
                     }).map(movie => (
                         // <li key={movie.id}>{ movie.data.movie.title }</li>
-                        <MovieCard movie={movie.data.movie} key={movie.data.id} />
-                    ))}
-                </div> : null
+                        <>
+                            <MovieCard movie={movie.data.movie} key={movie.data.id} />
+                        
+                
+                            <Button
+                                onClick={() => handleDelete(movie.id)}
+                                style={{ marginLeft: 0 }}
+                            >
+                                <CloseIcon />
+                            </Button>
+                        
+                            
+                        
+                        </>
+                    )) : 
+                        <h3 className="heading">No movies in your list! Add some!</h3>
+                    }
+                </div> : <h3 className="heading">Log in first to add your favorite movie!</h3>
                 }
             </div>
         </>

@@ -13,7 +13,7 @@ export const MovieCard = ({ movie, type }) => {
         alt={movie.title}
       />
 
-      <MovieControls type={type} movie={movie} />
+      {/* <MovieControls type={type} movie={movie} /> */}
     </div>
   );
 };
