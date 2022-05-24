@@ -15,7 +15,8 @@ export default function Header() {
         window.addEventListener('scroll', changeBackground);
 
         if (!loading && !authUser)
-        router.push('/')
+        // router.push('/')
+        console.log('Please login first');
     }, [authUser, loading])
     // console.log(777,'auth',authUser);
 

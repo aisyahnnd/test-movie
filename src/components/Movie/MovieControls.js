@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
 import { GlobalProvider } from "../../context/GlobalState";
 
 export const MovieControls = ({ type, movie }) => {
@@ -18,16 +19,15 @@ export const MovieControls = ({ type, movie }) => {
   }
 
   return (
-    <div className="inner-card-controls">
-        <>
+      <>
         {type === "watchlist" && (
-          <button
-            className="ctrl-btn"
+          <Button
             onClick={() => handleDelete(movie)}
+            style={{ marginLeft: 65 }}
           >
-            Delete
-          </button>)}
-        </>
-    </div>
+            <CloseIcon />
+          </Button>
+        )}
+      </>
   );   
 };

@@ -33,3 +33,21 @@ a {
     font-size: 6.4vw;
   }
 }
+
+.movie {
+  justify-content: space-around;
+  display: inline-block;
+  width: 200px;
+  padding: 5px;
+  margin-left: 22px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #282c34;
+  border-radius: 10px;
+  position: relative;
+}
+
+.movie img {
+  max-width: 100%;
+  border-radius: 4px;
+}

@@ -1,5 +1,4 @@
-.movieCard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.heading {
+    padding: 0 20px;
+    text-align: center;
 }

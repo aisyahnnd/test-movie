@@ -14,13 +14,17 @@ import {
 } from "../../config/config";
 import styles from './ContentModal.module.css';
 
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { database } from '../../../lib/firebase';
+import { useAuth } from '../../../context/AuthUserContext';
+
 
 export default function TransitionsModal({ children, media_type, id, movie }) {
     const { addMovieToWatchlist, watchlist } = useContext(GlobalContext);
     // console.log(777,'watchlist', addMovieToWatchlist);
 
     let storedMovie = watchlist.find((fal) => fal.id === movie.id);
-    // console.log(777,'movie', movie);
+    // console.log(777,'moviemov', storedMovie);
 
     const watchlistDisabled = storedMovie ? true : false;
     const [open, setOpen] = useState(false);
@@ -29,18 +33,52 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const { authUser, loading, signOut } = useAuth();
+
     const fetchData = async () => {
         const { data } = await axios.get(
             `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
         );
 
         setContent(data);
-        // console.log(777, data);
+        
+        // await setDoc(doc(database, "movies", "movie-id"), data);
+        console.log(777,'data:', data);
     };
 
     useEffect(() => {
         fetchData();
-    }, []);
+
+        if (!loading && !authUser)
+        // router.push('/')
+        console.log('Please login first');
+    }, [authUser, loading]);
+
+    
+    const handleSubmit = async () => {
+        //e.preventDefault()
+        // const docRef = await addDoc(doc(database, "movies"), {
+        //     movie
+        // })
+        const docRef = collection(database, 'movies')
+        await addDoc(docRef, { movie, user: authUser.uid })
+        .then(response => {
+            console.log(999,response)
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+
+        //console.log("Document written with ID: ", docRef.id);
+        // const moviesCollRef = collection(database, 'movies')
+        // addDoc(moviesCollRef, {title})
+        // .then(response => {
+        //     console.log(response)
+        // })
+        // .catch(error => {
+        //     console.log(error.message)
+        // })
+    }
 
     return (
         <>
@@ -111,16 +149,25 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
                             <span className={styles.ContentModal__description}>
                                 {content.overview}
                             </span>
-
+                            { authUser ? 
                             <Button
                                 variant="contained"
                                 color="primary"
                                 target="__blank"
                                 disabled={watchlistDisabled}
-                                onClick={() => addMovieToWatchlist(movie)}
+                                onClick={() => handleSubmit()}
+                                >
+                                ADD TO FAVORITE
+                            </Button> :
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                target="__blank"
+                                disabled
                                 >
                                 ADD TO FAVORITE
                             </Button>
+                            }
                         </div>
                     </div>
                     </Box>

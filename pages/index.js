@@ -15,7 +15,8 @@ export default function Home() {
   // Listen for changes on loading and authUser, redirect if needed
   useEffect(() => {
     if (!loading && !authUser)
-      router.push('/')
+      // router.push('/')
+      console.log('Please login first');
   }, [authUser, loading])
   console.log(777, authUser)
 
@@ -25,6 +26,7 @@ export default function Home() {
       <Head>
         <title>Movie App</title>
       </Head>
+      <div>
         { loading ? 
             <Typography> </Typography> :
         <>
@@ -33,6 +35,7 @@ export default function Home() {
             </Typography>
         </>
         }
+      </div>
       <Trending />
     </GlobalProvider>  
     </React.Fragment>

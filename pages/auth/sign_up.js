@@ -52,10 +52,9 @@ const SignUp = () => {
                     email: email,
                     password: passwordTwo
                 })
-            })
-            .then(authUser => {
+
                 console.log("Success. The user is created in firebase")
-                router.push("/auth/home");
+                router.push("/auth/login");
             })
             .catch(error => {
                 setError(error.message)
