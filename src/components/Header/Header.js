@@ -32,15 +32,15 @@ export default function Header() {
         <>
         <nav className={navbar ? styles.navbar.active : styles.navbar}>
             <div className={styles.leftItem}>
-                MOVIES
+                MOVIES APP
             </div>
             <header className={styles.container}>
                 <ul className={styles.list}>
-                    <li className={styles.item}><Link href="/">Movies</Link></li>
-                    <li className={styles.item}><Link href="/favorite/watchlist">Favorite</Link></li>
-                    <li className={styles.item}><Link href="/search/search">Search</Link></li>
-                    { authUser ? <li className={styles.item}><Link href="/"><a onClick={signOut}>Logout</a></Link></li> :
-                    <li className={styles.item}><Link href="/auth/login">Login</Link></li>
+                    <li className={styles.item}><Link href="/">Trending</Link></li>
+                    <li className={styles.item}><Link href="/favorite">Favorite</Link></li>
+                    <li className={styles.item}><Link href="/search">Search</Link></li>
+                    { authUser ? <li className={styles.item}><Link href="/"><a onClick={signOut}>Sign Out</a></Link></li> :
+                    <li className={styles.item}><Link href="/auth/login">Sign In</Link></li>
                     }
                 </ul>
             </header>

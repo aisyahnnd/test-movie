@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { database } from '../lib/firebase';
+import { database } from '../../lib/firebase';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
-import { MovieCard } from '../src/components/Movie/MovieCard';
-import { useAuth } from '../context/AuthUserContext';
+import { MovieCard } from '../../src/components/Movie/MovieCard';
+import { useAuth } from '../../context/AuthUserContext';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import Head from 'next/head';
+
 
 export default function Favorite() {
     const [movies, setMovies] = useState([]);
-    const { authUser, loading, signOut } = useAuth();
+    const { authUser, loading } = useAuth();
 
     function getMovies() {
         const movieCollectionRef = collection(database, 'movies')
@@ -26,10 +28,6 @@ export default function Favorite() {
 
     useEffect(() => {
         getMovies();
-    },[])
-
-    useEffect(() => {
-        console.log(movies);
     },[movies])
 
     useEffect(() => {
@@ -43,50 +41,44 @@ export default function Favorite() {
         deleteDoc(docRef)
         .then(() => {
             console.log('Document deleted');
-            window.location.reload(true);
         })
         .catch(error => console.log(error.message)) 
     }
-    // console.log(777,'auth',authUser)
-    // const mov = movies.filter((v) => {
-    //     return v.data.user === authUser.uid
-    // })
-    // console.log(777,'movmov',getMovies)
+    
+    // console.log(777,'movies',movies)
 
     return (
         <>
-            <div>
-                <div className="heading">
+            <Head>
+                <title>Favorite Movie</title>
+            </Head>
+            <div style={{ textAlign: 'center'}}>
+                <div>
                     <h2>List Favorite Movies</h2>
                 </div>
-                {/* <ul style={{ color: "white" }}>
-                    {movies.map(movie => (
-                        <li key={movie.id}>{ movie.data.movie.title }</li>
-                        <MovieCard movie={movie} key={movie.id} />
-                    ))}
-                </ul> */}
+
                 { authUser ? 
                 <div>
                     {movies && movies.length > 0 ? movies.filter((mov) => {
-                        return mov.data.user === authUser.uid
+                        return mov.data.userId === authUser.uid
                     }).map(movie => (
-                        // <li key={movie.id}>{ movie.data.movie.title }</li>
-                        <>
+                        <div style={{ display: 'inline-block' }}>
                             <MovieCard movie={movie.data.movie} key={movie.data.id} />
-                        
-                
-                            <Button
-                                onClick={() => handleDelete(movie.id)}
-                                style={{ marginLeft: 0 }}
-                            >
-                                <CloseIcon />
-                            </Button>
-                        
-                            
-                        
-                        </>
-                    )) : 
-                        <h3 className="heading">No movies in your list! Add some!</h3>
+                                <div style={{ paddingLeft: '90px' }}>
+                                    <Button
+                                        onClick={() => handleDelete(movie.id)}
+                                        style={{ 
+                                            marginLeft: 0,
+                                            display: 'block',
+                                            backgroundColor: '#131a28'
+                                        }}
+                                    >
+                                        <CloseIcon />
+                                    </Button>
+                                </div>
+                                
+                        </div> 
+                    )) : <h3 className="heading">No movies in your list! Add some!</h3>
                     }
                 </div> : <h3 className="heading">Log in first to add your favorite movie!</h3>
                 }

@@ -4,7 +4,7 @@ import { GlobalProvider } from "../src/context/GlobalState";
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthUserContext';
 import Head from 'next/head';
-import Trending from "./trending/trending";
+import Trending from "./trending";
 import Typography from '@mui/material/Typography';
 
 
@@ -29,11 +29,11 @@ export default function Home() {
       <div>
         { loading ? 
             <Typography> </Typography> :
-        <>
+          <>
             <Typography align="left" style={{ paddingLeft: 20, paddingTop: 20, }}>
               { authUser && <div>Congratulations {authUser?.email}! You are logged in.</div> }
             </Typography>
-        </>
+          </>
         }
       </div>
       <Trending />

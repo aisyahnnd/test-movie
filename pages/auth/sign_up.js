@@ -41,6 +41,7 @@ const SignUp = () => {
     const { createUserWithEmailAndPassword } = useAuth();
     const [showPassword, setShowPassword, setOpen] = useState(false);
     const databaseRef = collection(database, 'userLogin');
+    const { authUser } = useAuth();
 
     const onSubmit = async (event) => {
         setError(null);
@@ -50,10 +51,12 @@ const SignUp = () => {
                 addDoc(databaseRef, {
                     name: name, 
                     email: email,
-                    password: passwordTwo
+                    password: passwordTwo,
+                    uid: authUser.uid,
                 })
 
                 console.log("Success. The user is created in firebase")
+                console.log(888,'auth',authUser.uid);
                 router.push("/auth/login");
             })
             .catch(error => {

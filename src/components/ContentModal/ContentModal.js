@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from "../../context/GlobalState";
+import { addDoc, collection, getDocs, doc, setDoc } from 'firebase/firestore';
+import { database } from '../../../lib/firebase';
+import { useAuth } from '../../../context/AuthUserContext';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
@@ -13,28 +16,17 @@ import {
     unavailableLandscape,
 } from "../../config/config";
 import styles from './ContentModal.module.css';
-
-import { addDoc, collection, getDocs, doc, setDoc } from 'firebase/firestore';
-import { database } from '../../../lib/firebase';
-import { useAuth } from '../../../context/AuthUserContext';
-import { KeyboardReturnOutlined } from '@mui/icons-material';
+import Paper from '@mui/material/Paper';
 
 
 export default function TransitionsModal({ children, media_type, id, movie }) {
-    const { addMovieToWatchlist, watchlist } = useContext(GlobalContext);
-    // console.log(777,'watchlist', addMovieToWatchlist);
-
-    let storedMovie = watchlist.find((fal) => fal.id === movie.id);
-    // console.log(777,'moviemov', storedMovie);
-
-    const watchlistDisabled = storedMovie ? true : false;
     const [open, setOpen] = useState(false);
     const [content, setContent] = useState();
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const { authUser, loading, signOut } = useAuth();
+    const { authUser, loading } = useAuth();
     const [movies, setMovies] = useState([]);
 
     const fetchData = async () => {
@@ -43,82 +35,20 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
         );
 
         setContent(data);
-        
-        // await setDoc(doc(database, "movies", "movie-id"), data);
-        console.log(777,'data:', data);
     };
-
-    useEffect(() => {
-        fetchData();
-
-        if (!loading && !authUser)
-        // router.push('/')
-        console.log('Please login first');
-    }, [authUser, loading]);
-
     
     const handleSubmit = async () => {
-        //e.preventDefault()
-        // const docRef = await addDoc(doc(database, "movies"), {
-        //     movie
-        // })
         const docRef = collection(database, 'movies')
-        await addDoc(docRef, { movie, user: authUser.uid })
+        await addDoc(docRef, { movie, userId: authUser.uid, email: authUser.email })
         .then(response => {
             console.log(999,response)
         })
         .catch(error => {
             console.log(error.message)
         })
-
-        
-
-        //console.log("Document written with ID: ", docRef.id);
-        // const moviesCollRef = collection(database, 'movies')
-        // addDoc(moviesCollRef, {title})
-        // .then(response => {
-        //     console.log(response)
-        // })
-        // .catch(error => {
-        //     console.log(error.message)
-        // })
     }
 
-    // function getMovies(database) {
-    //     const moviesCol = collection(database, 'movies');
-    //     const movieSnapshot = getDocs(moviesCol);
-    //     const movieList = movieSnapshot.docs.map(doc => doc.data());
-    //     console.log(888,'xixi',movieList)
-    //     return movieList;
-    // }
-
-    // function getMovies() {
-    //     const movieCollectionRef = collection(database, 'movies')
-    //     getDocs(movieCollectionRef)
-    //     .then(response => {
-    //         const movs = response.docs.map(doc => ({
-    //             data: doc.data(),
-    //             id: doc.id,
-    //         }))
-    //         setMovies(movs)
-    //     })
-    //     .catch(error => console.log(error.message))
-    // }
-
     function getData() {
-        // const querySnapshot = await getDocs(collection(database, "movies"));
-        // const movs = querySnapshot.map((doc) => {
-        // // doc.data() is never undefined for query doc snapshots
-        //     console.log(doc.id, " => ", doc.data());
-        // });
-        // setMovies(movs);
-        // if (querySnapshot.exists()) {
-        // console.log("Document data:", querySnapshot.data());
-        // } else {
-        // // doc.data() will be undefined in this case
-        // console.log("No such document!");
-        // }
-
         const movieCollectionRef = collection(database, 'movies')
         getDocs(movieCollectionRef)
         .then(response => {
@@ -132,31 +62,24 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
     }
 
     useEffect(() => {
-        getData();
-    },[])
+        fetchData();
+
+        if (!loading && !authUser)
+        // router.push('/')
+        console.log('Please login first');
+    }, [authUser, loading]);
 
     useEffect(() => {
-        console.log(movies);
+        getData();
     },[movies])
-    
-//fal.data.user === authUser.uid
     
     let storedMovieFavorite = movies.find(fal => {
         return (
-            authUser ? fal.data.user === authUser.uid && fal.data.movie.id === movie.id : null
+            authUser ? fal.data.userId === authUser.uid && fal.data.movie.id === movie.id : null
         );  
     })
    
-    // console.log(444,'moviemov', movies);
-    // console.log(555,'moviemov', movie);
-    // console.log(666,'stored',storedMovieFavorite)
     const favoriteDisabled = storedMovieFavorite ? true : false;
-
-    // function disableButton() {
-    //     var btn = document.getElementById('btn');
-    //     btn.disabled = true;
-    //     btn.innerText = 'Posting...'
-    // }
 
     return (
         <>
@@ -183,18 +106,21 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
                     alignItems: "center",
                     justifyContent: "center",
                 }}
+                className={styles.modal}
             >
 
             <Fade in={open}>
                 {content && (
-                    <Box sx={{
+                    <Paper sx={{
                         width: "60%",
                         height: "70%",
-                        backgroundColor: "white",
+                        backgroundColor: "#39445a",
                         borderRadius: 10,
-                        color: "black",
-                        padding: 1,
+                        color: "white",
+                        padding: 2,
+                        border: "5px red",
                     }}>
+                    
                     <div className={styles.ContentModal}>
                         <img
                             src={
@@ -248,7 +174,7 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
                             }
                         </div>
                     </div>
-                    </Box>
+                    </Paper>
                 )}
             </Fade>
             </Modal>
