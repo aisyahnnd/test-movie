@@ -33,30 +33,30 @@ const style = {
 const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [passwordOne, setPasswordOne] = useState("");
-    const [passwordTwo, setPasswordTwo] = useState("");
+    const [password, setPassword] = useState("");
+    const [retypePassword, setRetypePassword] = useState("");
     const router = useRouter();
     //Optional error handling
     const [error, setError] = useState(null);
     const { createUserWithEmailAndPassword } = useAuth();
     const [showPassword, setShowPassword, setOpen] = useState(false);
     const databaseRef = collection(database, 'userLogin');
-    const { authUser } = useAuth();
 
     const onSubmit = async (event) => {
         setError(null);
-        if(passwordOne === passwordTwo) {
-            createUserWithEmailAndPassword(email, passwordOne)
-            .then(() => {
+        if(password === retypePassword) {
+            createUserWithEmailAndPassword(email, password)
+            .then((doc) => {
+ 
+                // console.log({doc: doc.user.uid})
                 addDoc(databaseRef, {
                     name: name, 
                     email: email,
-                    password: passwordTwo,
-                    uid: authUser.uid,
+                    uid: doc.user.uid,
+                    role: 'user'
                 })
 
                 console.log("Success. The user is created in firebase")
-                console.log(888,'auth',authUser.uid);
                 router.push("/auth/login");
             })
             .catch(error => {
@@ -109,9 +109,9 @@ const SignUp = () => {
                         <FormControl sx={{ mb: 2 }} fullWidth>
                             <TextField
                             type={showPassword ? 'text' : 'password'}
-                            name="passwordOne"
-                            value={passwordOne}
-                            onChange={(event) => setPasswordOne(event.target.value)}
+                            name="password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
                             id="signUpPassword"
                             placeholder="Password"
                             InputProps={{
@@ -129,8 +129,8 @@ const SignUp = () => {
                             <TextField
                             type={showPassword ? 'text' : 'password'}
                             name="password"
-                            value={passwordTwo}
-                            onChange={(event) => setPasswordTwo(event.target.value)}
+                            value={retypePassword}
+                            onChange={(event) => setRetypePassword(event.target.value)}
                             id="signUpPassword2"
                             placeholder="Confirm Password"
                             />

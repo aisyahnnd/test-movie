@@ -1,7 +1,5 @@
 import React from "react";
-import { MovieControls } from "./MovieControls";
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+
 
 export const MovieCard = ({ movie }) => {
   const IMAGES_API = 'https://image.tmdb.org/t/p/w500/';

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { GlobalProvider } from "../src/context/GlobalState";
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthUserContext';
 import Head from 'next/head';
@@ -22,7 +21,6 @@ export default function Home() {
 
   return (
     <React.Fragment>
-    <GlobalProvider>
       <Head>
         <title>Movie App</title>
       </Head>
@@ -36,8 +34,7 @@ export default function Home() {
           </>
         }
       </div>
-      <Trending />
-    </GlobalProvider>  
+      <Trending /> 
     </React.Fragment>
   );
 }
