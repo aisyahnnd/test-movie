@@ -56,3 +56,13 @@ a {
   padding: 0 20px;
   text-align: center;
 }
+
+.bg-image {
+  filter: blur(7px);
+  -webkit-filter: blur(7px);
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: auto;
+  object-fit: fill;
+}

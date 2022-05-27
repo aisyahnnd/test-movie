@@ -16,6 +16,7 @@ import Stack from '@mui/material/Stack';
 import Link from 'next/link';
 import Head from 'next/head';
 
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -55,6 +56,11 @@ export default function LogIn() {
         <Head>
             <title>Login</title>
         </Head>
+        <img
+            src="https://rb.gy/p2hphi"
+            className="bg-image"
+        />
+        
         <Container maxWidth="sm">
             <Box sx={style}>
                 <Typography variant="h4" component="h1" sx={{ mb: 4 }}>

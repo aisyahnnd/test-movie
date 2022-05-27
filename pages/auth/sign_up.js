@@ -74,6 +74,11 @@ const SignUp = () => {
         <Head>
             <title>Sign Up</title>
         </Head>
+        <img
+            src="https://rb.gy/p2hphi"
+            className="bg-image"
+        />
+        
         <Container maxWidth="sm">
             <Box sx={style}>
                 <Typography variant="h4" component="h1" sx={{ mb: 4 }}>

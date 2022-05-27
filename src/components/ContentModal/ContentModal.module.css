@@ -86,10 +86,10 @@
     height: 100%;
   }
   .ContentModal__title {
-    font-size: 3.5vw;
+    font-size: 2.0vw;
   }
   .ContentModal__description {
-    font-size: 22px;
+    font-size: 15px;
   }
 }
 
@@ -97,14 +97,4 @@
   display: "flex";
   align-items: "center";
   justify-content: "center";
-}
-
-.paper {
-  width: "50%";
-  height: "60%";
-  background-color: "#39445a";
-  border-radius: 10;
-  color: "white";
-  box-shadow: 3px;
-  padding: 2px;
 }
