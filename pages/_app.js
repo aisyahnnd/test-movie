@@ -3,10 +3,9 @@ import { AuthUserProvider } from '../context/AuthUserContext';
 import Header from '../src/components/Header/Header';
 
 function MyApp({ Component, pageProps }) {
-
-  return (        
+  return (
     <AuthUserProvider>
-      <Header/>
+      <Header />
       <Component {...pageProps} />
     </AuthUserProvider>
   );
