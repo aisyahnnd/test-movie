@@ -36,7 +36,7 @@ export default function Header() {
               </Link>
             </li>
             <li className={styles.item}>
-              <Link href="/search">
+              <Link href="/Search">
                 <a>Search</a>
               </Link>
             </li>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthUserContext';
 import Head from 'next/head';
-import Trending from './trending';
+import Trending from './Trending';
 import Typography from '@mui/material/Typography';
 
 export default function Home() {
@@ -11,11 +11,8 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !authUser)
-      // router.push('/')
-      console.log('Please login first');
+    if (!loading && !authUser) console.log('Please login first');
   }, [authUser, loading]);
-  // console.log(777, authUser);
 
   return (
     <React.Fragment>

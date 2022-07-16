@@ -17,7 +17,6 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Link from 'next/link';
 import Head from 'next/head';
-import Image from ' next/image';
 
 const style = {
   position: 'absolute',
@@ -74,7 +73,7 @@ const SignUp = () => {
       <Head>
         <title>Sign Up</title>
       </Head>
-      <Image src="https://rb.gy/p2hphi" className="bg-image" alt="background-image" />
+      <img src="https://rb.gy/p2hphi" className="bg-image" alt="background-image" />
 
       <Container maxWidth="sm">
         <Box sx={style}>
