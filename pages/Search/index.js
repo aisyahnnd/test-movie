@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CustomPagination from '../../src/components/Pagination/CustomPagination';
 import SingleContent from '../../src/components/SingleContent/SingleContent';
-import styles from './search.module.css';
+import styles from './Search.module.css';
 import TextField from '@mui/material/TextField';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

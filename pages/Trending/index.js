@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SingleContent from '../../src/components/SingleContent/SingleContent';
 import CustomPagination from '../../src/components/Pagination/CustomPagination';
-import styles from './trending.module.css';
+import styles from './Trending.module.css';
 
 const Trending = () => {
   const [page, setPage] = useState({ index: 1 });
