@@ -5,7 +5,6 @@ import styles from './SingleContent.module.css';
 import Box from '@mui/material/Box';
 
 const SingleContent = ({ id, poster, title, media_type, vote_average, movie }) => {
-  //   console.log('single:', movie);
   return (
     <ContentModal media_type={media_type} id={id} movie={movie}>
       <Box

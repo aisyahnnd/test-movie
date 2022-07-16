@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { database } from '../../../lib/firebase';
@@ -10,7 +10,7 @@ import { img_500, unavailable } from '../../config/config';
 import styles from './ContentModal.module.css';
 import Paper from '@mui/material/Paper';
 
-export default function TransitionsModal({ children, media_type, id, movie }) {
+export default function ContentModal({ children, media_type, id, movie }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
 
@@ -20,6 +20,11 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
   const { authUser } = useAuth();
   const [movies, setMovies] = useState([]);
 
+  useEffect(() => {
+    fetchData();
+    getData();
+  }, [movies]);
+
   const fetchData = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
@@ -28,13 +33,11 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
     setContent(data);
   };
 
-  //   console.log('modal:', content);
-
   const handleSubmit = async () => {
     const docRef = collection(database, 'movies');
     await addDoc(docRef, { movie, userId: authUser.uid, email: authUser.email })
       .then((response) => {
-        console.log(999, response);
+        console.log({ response });
       })
       .catch((error) => {
         console.log(error.message);
@@ -53,11 +56,6 @@ export default function TransitionsModal({ children, media_type, id, movie }) {
       })
       .catch((error) => console.log(error.message));
   }
-
-  useEffect(() => {
-    fetchData();
-    getData();
-  }, [movies]);
 
   let storedMovieFavorite = movies.find((fal) => {
     return authUser ? fal.data.userId === authUser.uid && fal.data.movie.id === movie.id : null;

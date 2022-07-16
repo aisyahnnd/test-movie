@@ -18,7 +18,7 @@ export default function CustomPagination({ page, type, setPage, numOfPages = 10 
     window.scroll(0, 0);
   };
   console.log(888, type, page[type]);
-  // ketika handle page berubah, di dalam fungsi setPage akan mengcopy initialState yang lama
+  // ketika handle page berubah, di dalam fungsi setPage akan mengoper initialState yang lama
   // dengan [type] movie, kemudian nilai halamannya akan berubah sesuai target angka yang didapatkan
 
   return (

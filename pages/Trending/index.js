@@ -7,6 +7,12 @@ import styles from './trending.module.css';
 const Trending = () => {
   const [page, setPage] = useState({ index: 1 });
   const [content, setContent] = useState([]);
+  const [numOfPages, setNumOfPages] = useState();
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetchTrending();
+  }, [page]);
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
@@ -14,13 +20,8 @@ const Trending = () => {
     );
 
     setContent(data.results);
+    setNumOfPages(data.total_pages);
   };
-  //   console.log('trending:', content);
-
-  useEffect(() => {
-    window.scroll(0, 0);
-    fetchTrending();
-  }, [page]);
 
   return (
     <>
@@ -29,6 +30,7 @@ const Trending = () => {
           content.map((each) => (
             <SingleContent
               id={each.id}
+              key={each.id}
               poster={each.poster_path}
               title={each.title || each.name}
               media_type={each.media_type}
@@ -37,7 +39,7 @@ const Trending = () => {
             />
           ))}
       </div>
-      <CustomPagination setPage={setPage} type={'index'} page={page} />
+      <CustomPagination numOfPages={numOfPages} setPage={setPage} type={'index'} page={page} />
     </>
   );
 };

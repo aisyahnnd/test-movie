@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -37,6 +37,12 @@ const Search = () => {
     },
   });
 
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetchSearch(type === 0 ? 'movie' : 'tv');
+  }, [type, page]);
+  // ketika ada perubahan pada state type/page maka fetchSearch dieksekusi
+
   const fetchSearch = async (typePage) => {
     try {
       const { data } = await axios.get(
@@ -46,17 +52,10 @@ const Search = () => {
       );
       setContent(data.results);
       setNumOfPages(data.total_pages);
-      console.log(777, typePage);
-      console.log(777, data.results);
     } catch (error) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    window.scroll(0, 0);
-    fetchSearch(type === 0 ? 'movie' : 'tv');
-  }, [type, page]);
 
   return (
     <div>

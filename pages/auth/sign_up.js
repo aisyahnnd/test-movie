@@ -17,6 +17,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from ' next/image';
 
 const style = {
   position: 'absolute',
@@ -42,7 +43,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword, setOpen] = useState(false);
   const databaseRef = collection(database, 'userLogin');
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
     setError(null);
     if (password === retypePassword) {
       createUserWithEmailAndPassword(email, password)
@@ -73,7 +74,7 @@ const SignUp = () => {
       <Head>
         <title>Sign Up</title>
       </Head>
-      <img src="https://rb.gy/p2hphi" className="bg-image" />
+      <Image src="https://rb.gy/p2hphi" className="bg-image" alt="background-image" />
 
       <Container maxWidth="sm">
         <Box sx={style}>

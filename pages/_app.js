@@ -4,6 +4,7 @@ import Header from '../src/components/Header/Header';
 
 function MyApp({ Component, pageProps }) {
   return (
+    // apapun component yang di dalam AuthUserProvider bisa mengakses variable/state yang ada di dalamnya
     <AuthUserProvider>
       <Header />
       <Component {...pageProps} />

@@ -58,7 +58,7 @@ export default function Favorite() {
                   return mov.data.userId === authUser.uid;
                 })
                 .map((movie) => (
-                  <div style={{ display: 'inline-block' }}>
+                  <div style={{ display: 'inline-block' }} key={movie.id}>
                     <MovieCard movie={movie.data.movie} key={movie.id} />
                     <div style={{ paddingLeft: '90px' }}>
                       <Button
