@@ -80,7 +80,7 @@ export default function Header() {
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link href="/Favorite">
+                <Link href="/favorite">
                   <a>Favorite</a>
                 </Link>
               </MenuItem>
