@@ -97,7 +97,7 @@ export default function Header() {
                 </MenuItem>
               ) : (
                 <MenuItem onClick={handleClose}>
-                  <Link href="/auth/LogIn">
+                  <Link href="/auth/login">
                     <a>Sign In</a>
                   </Link>
                 </MenuItem>
