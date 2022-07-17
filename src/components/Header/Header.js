@@ -31,7 +31,7 @@ export default function Header() {
               </Link>
             </li>
             <li className={styles.item}>
-              <Link href="/Favorite">
+              <Link href="/favorite">
                 <a>Favorite</a>
               </Link>
             </li>
@@ -48,7 +48,7 @@ export default function Header() {
               </li>
             ) : (
               <li className={styles.item}>
-                <Link href="/auth/LogIn">
+                <Link href="/auth/login">
                   <a>Sign In</a>
                 </Link>
               </li>
