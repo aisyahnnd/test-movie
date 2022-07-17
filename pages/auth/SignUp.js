@@ -142,7 +142,7 @@ const SignUp = () => {
           </Grid>
           <Grid>
             Have an account? {''}
-            <Link variant="body1" color="primary" component="a" href="/auth/LogIn">
+            <Link variant="body1" color="primary" component="a" href="/auth/login">
               <a>Sign in now</a>
             </Link>
           </Grid>
