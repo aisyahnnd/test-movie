@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { database } from '../../lib/firebase';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';

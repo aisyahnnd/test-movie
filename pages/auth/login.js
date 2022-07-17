@@ -105,7 +105,7 @@ export default function LogIn() {
           </Grid>
           <Grid>
             No account? {''}
-            <Link variant="body1" color="primary" component="a" href="/auth/sign_up">
+            <Link variant="body1" color="primary" component="a" href="/auth/SignUp">
               <a>Create one</a>
             </Link>
           </Grid>
