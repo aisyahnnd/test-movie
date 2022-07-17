@@ -38,14 +38,12 @@ export default function Favorite() {
       .catch((error) => console.log(error.message));
   };
 
-  console.log(777, 'movies', movies);
-
   return (
     <>
       <Head>
         <title>Favorite Movie</title>
       </Head>
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', paddingTop: 100 }}>
         <div>
           <h2>List Favorite Movies</h2>
         </div>
@@ -63,6 +61,7 @@ export default function Favorite() {
                     <div style={{ paddingLeft: '90px' }}>
                       <Button
                         onClick={() => handleDelete(movie.id)}
+                        className="buttonDelete"
                         style={{
                           marginLeft: 0,
                           display: 'block',

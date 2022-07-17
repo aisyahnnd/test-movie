@@ -21,7 +21,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: 400,
   bgcolor: 'common.white',
   boxShadow: 24,
   p: 4,
@@ -55,7 +55,6 @@ export default function LogIn() {
       <Head>
         <title>Login</title>
       </Head>
-      <img src="https://rb.gy/p2hphi" className="bg-image" alt="background-image" />
 
       <Container maxWidth="sm">
         <Box sx={style}>

@@ -3,7 +3,7 @@ import firebase from './firebase';
 
 const formatAuthUser = (user) => ({
   uid: user.uid,
-  email: user.email
+  email: user.email,
 });
 
 export default function useFirebaseAuth() {
@@ -12,18 +12,17 @@ export default function useFirebaseAuth() {
 
   const authStateChanged = async (authState) => {
     if (!authState) {
-      setLoading(false)
+      setLoading(false);
       return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     var formattedUser = formatAuthUser(authState);
 
     setAuthUser(formattedUser);
 
     setLoading(false);
-
   };
 
   const clear = () => {
@@ -38,7 +37,13 @@ export default function useFirebaseAuth() {
     firebase.auth().createUserWithEmailAndPassword(email, password);
 
   const signOut = () =>
-    firebase.auth().signOut().then(clear);
+    firebase
+      .auth()
+      .signOut()
+      .then(clear)
+      .then(() => {
+        window.location.reload();
+      });
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(authStateChanged);
@@ -50,6 +55,6 @@ export default function useFirebaseAuth() {
     loading,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    signOut
+    signOut,
   };
 }

@@ -42,7 +42,6 @@
 }
 
 .ContentModal__title {
-  height: 12%;
   font-size: 50px;
   display: flex;
   align-items: center;
@@ -86,7 +85,35 @@
     height: 100%;
   }
   .ContentModal__title {
-    font-size: 2.0vw;
+    font-size: 50px;
+  }
+  .ContentModal__description {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ContentModal__landscape {
+    display: none;
+    border-radius: 5px;
+  }
+  .ContentModal__portrait {
+    display: flex;
+    width: 60%;
+    border-radius: 5px;
+  }
+  .ContentModal {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .ContentModal__about {
+    width: 100%;
+    padding: 0;
+    height: 100%;
+  }
+  .ContentModal__title {
+    font-size: 20px;
   }
   .ContentModal__description {
     font-size: 15px;

@@ -24,7 +24,7 @@ export default function Home() {
           <Typography> </Typography>
         ) : (
           <>
-            <Typography align="left" style={{ paddingLeft: 20, paddingTop: 20 }}>
+            <Typography align="left" style={{ paddingLeft: 20, paddingTop: 100 }}>
               {authUser && <div>Congratulations {authUser?.email}! You are logged in.</div>}
             </Typography>
           </>

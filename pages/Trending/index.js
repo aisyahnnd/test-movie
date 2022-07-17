@@ -3,6 +3,7 @@ import axios from 'axios';
 import SingleContent from '../../src/components/SingleContent/SingleContent';
 import CustomPagination from '../../src/components/Pagination/CustomPagination';
 import styles from './Trending.module.css';
+import Typography from '@mui/material/Typography';
 
 const Trending = () => {
   const [page, setPage] = useState({ index: 1 });

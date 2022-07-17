@@ -83,17 +83,20 @@ const Search = () => {
           }}
           style={{ paddingBottom: 5 }}
           aria-label="icon label tabs example"
+          className={styles.tabx}
           centered
         >
           <Tab
             icon={<MovieIcon />}
-            style={{ width: '100%', color: 'white' }}
+            style={{ width: '200px', color: 'white' }}
             label="Search Movies"
+            className={styles.tab}
           />
           <Tab
             icon={<LiveTvIcon />}
-            style={{ width: '100%', color: 'white' }}
+            style={{ width: '200px', color: 'white' }}
             label="Search TV Series"
+            className={styles.tab}
           />
         </Tabs>
       </ThemeProvider>

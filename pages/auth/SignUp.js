@@ -23,7 +23,7 @@ const style = {
   top: '56%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: 400,
   bgcolor: 'common.white',
   boxShadow: 24,
   p: 4,
@@ -73,7 +73,6 @@ const SignUp = () => {
       <Head>
         <title>Sign Up</title>
       </Head>
-      <img src="https://rb.gy/p2hphi" className="bg-image" alt="background-image" />
 
       <Container maxWidth="sm">
         <Box sx={style}>
@@ -143,7 +142,7 @@ const SignUp = () => {
           </Grid>
           <Grid>
             Have an account? {''}
-            <Link variant="body1" color="primary" component="a" href="/auth/login">
+            <Link variant="body1" color="primary" component="a" href="/auth/LogIn">
               <a>Sign in now</a>
             </Link>
           </Grid>

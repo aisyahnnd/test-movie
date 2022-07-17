@@ -7,14 +7,7 @@ import Box from '@mui/material/Box';
 const SingleContent = ({ id, poster, title, media_type, vote_average, movie }) => {
   return (
     <ContentModal media_type={media_type} id={id} movie={movie}>
-      <Box
-        className={styles.media}
-        sx={{
-          width: 250,
-          height: 400,
-          paddingTop: 3,
-        }}
-      >
+      <Box className={styles.media}>
         <Badge badgeContent={vote_average} color={vote_average > 6.5 ? 'primary' : 'secondary'} />
         <img
           className={styles.poster}

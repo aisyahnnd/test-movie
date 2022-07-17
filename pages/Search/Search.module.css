@@ -2,6 +2,7 @@
     display: flex;
     margin: 15px 15px;
     color: white;
+    padding-top: 100px;
 }
 
 .trending {
@@ -9,3 +10,12 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+@media (max-width: 768px) {
+    .tabx {
+        width: 100%
+    }
+    .tab {
+        width: 30%;
+    }
+  }
